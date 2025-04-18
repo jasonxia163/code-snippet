@@ -109,6 +109,6 @@ int main() {
                               0x5b, 0xa0, 0x1e, 0x11, 0x08, 0xd4};
   const size_t sps_size = sizeof(sps_data) / sizeof(sps_data[0]);
   ParseSps(sps_data, sps_size);
-  printf("max_off     set = %d\n", sps_size * 8);
+  printf("max_offset = %ld\n", sps_size * 8);
   return 0;
-}
+}   

@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 project(cpp-code-snippets)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(USE_SANITIZER "Turn AddressSanitizer on" OFF)
+option(USE_SANITIZER "Turn AddressSanitizer on" ON)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=auto -fno-omit-frame-pointer")
 
 if(USE_SANITIZER)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize-recover=address")

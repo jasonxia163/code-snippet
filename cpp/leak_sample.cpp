@@ -23,10 +23,15 @@ class Frame {
     std::cout << "Frame " << id_ << " constructed" << std::endl;
   }
   ~Frame() { std::cout << "Frame " << id_ << " destructed" << std::endl; }
+
   void AddSegment(std::shared_ptr<Segment> segment) {
     segments_.push_back(segment);
   }
 
+  void Resize(int size) {
+    segments_.resize(size);
+  }
+  
  private:
   int id_;
   int start_;
@@ -42,6 +47,7 @@ int main() {
         std::make_shared<Segment>(i, i * 100, (i + 1) * 100);
     frame.AddSegment(segment);
   }
+  frame.Resize(30);
 
   return 0;
 }
