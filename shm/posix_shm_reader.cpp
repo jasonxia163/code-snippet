@@ -6,7 +6,7 @@
 #include <cstring>
 
 int main() {
-  int fd = shm_open("./test_shm", O_RDONLY, 0666);
+  int fd = shm_open("/test_shm", O_RDONLY, 0666);
   if (fd == -1) {
     perror("shm_open");
     return 1;
@@ -21,5 +21,5 @@ int main() {
   printf("shm_addr: %p, %s\n", shm_addr, shm_addr);
   munmap(shm_addr, 1024);
 
-  shm_unlink("./test_shm");
+  shm_unlink("/test_shm");
 }

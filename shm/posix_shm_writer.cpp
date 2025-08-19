@@ -6,7 +6,7 @@
 #include <cstring>
 
 int main() {
-  int fd = shm_open("./test_shm", O_CREAT | O_RDWR, 0666);
+  int fd = shm_open("/test_shm", O_CREAT | O_RDWR, 0666);
   if (fd == -1) {
     perror("shm_open");
     return 1;
