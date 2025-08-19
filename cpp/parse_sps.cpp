@@ -42,7 +42,7 @@ void ParseSps(const uint8_t* sps, size_t size) {
   int profile_idc = sps[bit_offset / 8];
   bit_offset += 8;
   bit_offset += 16;  // 跳过 constraints_flags 和 level_idc
-  // int seq_parameter_set_id = ReadUe(sps, &bit_offset, size);
+  int seq_parameter_set_id = ReadUe(sps, &bit_offset, size);
   int chroma_format_idc = 1;
 
   if (profile_idc == 100 || profile_idc == 110 || profile_idc == 122 ||
@@ -100,15 +100,16 @@ void ParseSps(const uint8_t* sps, size_t size) {
   height_ =
       (pic_height_in_map_units_minus1 + 1) * 16 * (2 - frame_mbs_only_flag) -
       (frame_crop_top_offset + frame_crop_bottom_offset) * 2;
+
+  printf("width = %d, height = %d\n", width_, height_);
+  printf("offset = %d, max_offset = %ld\n", bit_offset, size * 8 - 1);
 }
 
 int main() {
-  // const uint8_t sps_data[] = {0x42, 0x00, 0x1f, 0xab, 0x40, 0x28, 0x02, 0xdc,
-  // 0x80};
-  const uint8_t sps_data[] = {0x42, 0xc0, 0x1f, 0x8c, 0x68, 0x05, 0x00,
-                              0x5b, 0xa0, 0x1e, 0x11, 0x08, 0xd4};
+  // const uint8_t sps_data[] = {0x42, 0x00, 0x1f, 0xab, 0x40, 0x28, 0x02, 0xdc, 0x80};
+  const uint8_t sps_data[] = {0x42, 0xc0, 0x1f, 0x8c, 0x68, 0x05, 0x00, 0x5b, 0xa0, 0x1e, 0x11, 0x08, 0xd4};
   const size_t sps_size = sizeof(sps_data) / sizeof(sps_data[0]);
   ParseSps(sps_data, sps_size);
-  printf("max_offset = %ld\n", sps_size * 8);
+  
   return 0;
 }   
